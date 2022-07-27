@@ -4,23 +4,20 @@ import {
   NestModule,
   RequestMethod,
 } from "@nestjs/common";
-import { CatModule } from "./cats/cat.module";
-import { CatsController } from "./cats/controllers/cats.controller";
 import { Configuration } from "./config/config.keys";
-import { ConfigModule } from "./config/config.module";
 import { ConfigService } from "./config/config.service";
 import { HeadersMiddleware } from "./middlewares/headers.middleware";
-import { MongooseModule } from "@nestjs/mongoose";
+// import { MongooseModule } from "@nestjs/mongoose";
+import { HealthController } from "./health/health.controller";
 import environments from "./environments";
+import { PostsModule } from "./posts/posts.module";
+import { ConfigModule } from "./config/config.module";
+import { DatabaseModule } from "./config/db/database.module";
 
 @Module({
-  controllers: [],
+  controllers: [HealthController],
   providers: [],
-  imports: [
-    CatModule,
-    ConfigModule,
-    MongooseModule.forRoot(environments.DATABASE_URL),
-  ],
+  imports: [ConfigModule, DatabaseModule, PostsModule],
 })
 export class AppModule implements NestModule {
   static port: number | string;
@@ -30,20 +27,8 @@ export class AppModule implements NestModule {
   }
 
   configure(consumer: MiddlewareConsumer) {
-    // consumer.apply(HeadersMiddleware).forRoutes("cats");
     consumer
       .apply(HeadersMiddleware)
       .forRoutes({ path: "cats", method: RequestMethod.GET });
-
-    // consumer
-    //   .apply(HeadersMiddleware)
-    //   .exclude(
-    //     { path: "cats", method: RequestMethod.GET },
-    //     { path: "cats", method: RequestMethod.POST },
-    //     "cats/(.*)"
-    //   )
-    //   .forRoutes(CatsController);
-
-    // consumer.apply(cors(), helmet(), HeadersMiddleware).forRoutes(CatsController);
   }
 }
