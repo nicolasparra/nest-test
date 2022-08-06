@@ -1,6 +1,7 @@
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { DataSourceOptions } from "typeorm";
 import Post from "../../posts/models/post.entity";
+import User from "../../users/models/user.entity";
 import { Configuration } from "../config.keys";
 import { ConfigModule } from "../config.module";
 import { ConfigService } from "../config.service";
@@ -18,7 +19,7 @@ export const databaseProviders = [
         password: configService.get(Configuration.DB_PASS),
         database: configService.get(Configuration.DB_NAME),
         // entities: [__dirname + "/../../**/**/**/*.entity.ts"],
-        entities: [Post],
+        entities: [Post, User],
         synchronize: true, // never use TRUE in production!
         migrations: [__dirname + "/migrations/*{.ts,.js}"],
       } as DataSourceOptions;

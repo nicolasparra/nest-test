@@ -11,9 +11,19 @@ export default class Post extends BaseEntity {
   @Column({ type: "varchar", length: 25, nullable: false })
   public content: string;
 
-  @Column({ type: "timestamp", name: "created_at" })
+  @Column({
+    type: "timestamp",
+    name: "created_at",
+    default: () => "CURRENT_TIMESTAMP",
+    nullable: true,
+  })
   createdAt: Date;
 
-  @Column({ type: "timestamp", name: "updated_at" })
+  @Column({
+    type: "timestamp",
+    name: "updated_at",
+    default: () => "CURRENT_TIMESTAMP",
+    nullable: true,
+  })
   updateAt: Date;
 }

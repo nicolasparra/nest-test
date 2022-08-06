@@ -13,11 +13,12 @@ import environments from "./environments";
 import { PostsModule } from "./posts/posts.module";
 import { ConfigModule } from "./config/config.module";
 import { DatabaseModule } from "./config/db/database.module";
+import { AuthenticationModule } from "./auth/authentication.module";
 
 @Module({
   controllers: [HealthController],
   providers: [],
-  imports: [ConfigModule, DatabaseModule, PostsModule],
+  imports: [ConfigModule, DatabaseModule, PostsModule, AuthenticationModule],
 })
 export class AppModule implements NestModule {
   static port: number | string;

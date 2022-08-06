@@ -11,6 +11,9 @@ export class ConfigService {
       DB_USER: process.env.DB_USER || "postgres",
       DB_PASS: process.env.DB_PASS || "12345678",
       DB_NAME: process.env.DB_NAME || "nest",
+      JWT_EXPIRATION_TIME:
+        process.env.JWT_EXPIRATION_TIME || "JWT_EXPIRATION_TIME",
+      JWT_SECRET: process.env.JWT_SECRET || "JWT_SECRET",
     };
   }
 

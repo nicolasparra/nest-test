@@ -5,4 +5,6 @@ export enum Configuration {
   DB_USER = "DB_USER",
   DB_PASS = "DB_PASS",
   DB_NAME = "DB_NAME",
+  JWT_SECRET = "JWT_SECRET",
+  JWT_EXPIRATION_TIME = "JWT_EXPIRATION_TIME",
 }
